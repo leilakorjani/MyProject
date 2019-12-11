@@ -210,28 +210,23 @@ function saveUserBtnClicked(e) {
     if (document.getElementById("name-edit").value == "") {
         alert("Name is required")
         return false;
-    }
-    else if (document.getElementById("email-edit").value == "") {
+    }else if (document.getElementById("email-edit").value == "") {
 
         alert("Email is required");
         return false;
 
-    }
-    else if (document.getElementById("phone-edit").value == "") {
+    }else if (document.getElementById("phone-edit").value == "") {
         alert("Phone is required");
         return false;
 
-    }
-    else if (!validateEmail(document.getElementById("email-edit").value)) {
+    }else if (!validateEmail(document.getElementById("email-edit").value)) {
         alert("email is not correct!");
         return false;
-    }
-    else if (!validatePhone(document.getElementById("phone-edit").value)) {
+    }else if (!validatePhone(document.getElementById("phone-edit").value)) {
         alert("phone is not correct!");
         return false;
 
-    }
-    else {
+    }else {
 
         const userID = document.querySelector(".edit-userid").value;
         const userRef = dbRef.child('users1/' + userID);
@@ -245,8 +240,6 @@ function saveUserBtnClicked(e) {
             let value = textField.value;
             editedUserObject[textField.getAttribute("data-key")] = textField.value
         });
-
-
 
         userRef.update(editedUserObject)
         ListForm.style.display = 'block';
@@ -285,7 +278,6 @@ function ShowEditForm(event) {
 
     event.preventDefault();
 }
-
 
 function keyHandler(event) {
     debugger;
@@ -349,29 +341,22 @@ function addUserBtnClicked() {
     if (document.getElementById("name").value == "") {
         alert("Name is required")
         return false;
-    }
-    else    if (document.getElementById("email").value == "") {
+    }else if (document.getElementById("email").value == "") {
 
         alert("Email is required");
         return false;
 
-    }
-   else if (document.getElementById("phone").value == "") {
+    }else if (document.getElementById("phone").value == "") {
         alert("Phone is required");
         return false;
 
-    }
-   else if (!validateEmail(document.getElementById("email").value)) {
+    }else if (!validateEmail(document.getElementById("email").value)) {
         alert("email is not correct!");
         return false;
-    }
-    else if (!validatePhone(document.getElementById("phone").value)) {
+    }else if (!validatePhone(document.getElementById("phone").value)) {
         alert("phone is not correct!");
         return false;
-
-    }
-    else
-{        
+    }else{        
        
         const usersRef = dbRef.child('users1');
 
@@ -387,18 +372,15 @@ function addUserBtnClicked() {
             let value = addUserInputsUI[i].value;
             newUser[key] = value;
         }
-
         usersRef.push(newUser, function () {
             console.log("data has been inserted");
         });
-       
-        showListDisplay();
+        // showListDisplay();
+        ListForm.style.display = 'none';
+        NewForm.style.display = "none";
         return true;
     }
-
-    
 }
-
 
 function deleteButtonClicked1(e) {
 
