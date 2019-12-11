@@ -1,0 +1,126 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Firebase CRUD Javascript</title>
+    <link rel="stylesheet" href="style.css">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+    <div class="container body-content">
+        <div class="row align-items-center h-100" style="background:#0026ff;color:white;height:60px;padding-top:10px;padding-left:10px;">
+            <div class="col col-md-4 my-autor align-self-center">
+                <h4> Contact Managment</h4>
+            </div>
+            <div class="col col-md-8 align-self-center">
+                <button class="btn  btn-primary" id="showList"><i class="fa fa-bars"></i> Index</button>
+                <button class="btn btn-primary" id="showNew"><i class="fa fa-plus"></i> New</button>
+            </div>
+        </div>
+
+        <!-- show user module -->
+
+        <div class="panel panel-default" style="margin:20px;display:none;" id="divNew">
+            <div class="panel-heading">New Contact</div>
+            <div class="panel-body">
+
+                <form id="formCreate" action="">
+                    <div class="form-group">
+                        <label for="Name">Name:</label>
+                        <input data-key='name' class="form-control user-input" id="name" type="text">
+                    </div>
+                    <div class="form-group">
+                        <label for="Email">Email:</label>
+                        <input type="text" class="form-control user-input" data-key='email' id="email">
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Phone:</label>
+                        <input class="form-control user-input" data-key='phone' id="phone" type="text">
+                    </div>
+                    <button class="btn btn-primary " type='button' id="add-user-btn">Submit</button>
+                </form>
+            </div>
+        </div>
+        <table class="table " id="divList" style="display:none;">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>name</th>
+                    <th>email</th>
+                    <th>phone</th>
+
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody id="user-list"></tbody>
+        </table>
+
+
+        <div class="panel panel-default" style="margin:20px;display:none;" id="divEdit">
+            <div class="panel-heading">Edit Contact</div>
+            <div class="panel-body">
+                <input type="hidden" class="edit-userid">
+                <form action="">
+                    <div class="form-group">
+                        <label for="Name">Name:</label>
+                        <input data-key='name' class="form-control edit-user-input-edit" id="name-edit">
+                    </div>
+                    <div class="form-group">
+                        <label for="Email">Email:</label>
+                        <input type="email" class="form-control edit-user-input-edit" data-key='email' id="email-edit">
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Phone:</label>
+                        <input class="form-control edit-user-input-edit" data-key='phone' id="phone-edit">
+                    </div>
+                    <button class="btn btn-primary  " type="button" id="edit-user-btn">Submit</button>
+                </form>
+            </div>
+        </div>
+
+
+        <div class="panel panel-default"  id="DivDetail" style="margin:20px;display:none;">
+            <div class="panel-heading">Detaile Contact</div>
+            <div class="panel-body">
+                <form>
+                    <div class="form-group">
+                        <label for="Name">Name:</label>
+                        <input data-key='name' class="form-control edit-user-input-detail" disabled id="name_d" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="Email">Email:</label>
+                        <input  class="form-control edit-user-input-detail" disabled data-key='email' id="email_d" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Phone:</label>
+                        <input class="form-control edit-user-input-detail" data-key='phone' disabled id="phone_d" required >
+                    </div>
+                    <button type="button" class="btn btn-primary " id="showEdite">Edit</button>
+                    <button type="button" class="btn btn-primary " id="delete">Delete</button>
+                </form>
+            </div>
+        </div>
+        <div id="user-detail"></div>
+
+    </div>
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="/__/firebase/7.5.2/firebase-app.js"></script>
+
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+    <!-- use firestore database -->
+    <script src="/__/firebase/7.5.2/firebase-firestore.js"></script>
+    <!-- Initialize Firebase -->
+    <script src="/__/firebase/init.js"></script>
+
+
+        <script src="https://www.gstatic.com/firebasejs/4.8.1/firebase.js"></script>
+        <script type="text/javascript" src="app.js"></script>
+
+</body>
+
+</html>

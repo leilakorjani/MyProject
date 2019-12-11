@@ -1,0 +1,134 @@
+﻿
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Firebase CRUD Javascript</title>
+    <link rel="stylesheet" href="style.css">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+    <div class="container body-content">
+        <div class="row align-items-center h-100" style="background:#0026ff;color:white;height:60px;padding-top:10px;padding-left:10px;">
+            <div class="col col-md-4 my-autor align-self-center">
+                <h4> contact Managment</h4>
+            </div>
+            <div class="col col-md-8 align-self-center">
+                <a class="btn  btn-primary" href="index.html"><i class="fa fa-bars"></i> Index</a>
+                <a class="btn btn-primary" href="Create.html"><i class="fa fa-plus"></i> New</a>
+            </div>
+        </div>
+        <!-- add user module -->
+        <!-- edit user module -->
+        <div class="panel panel-default" style="margin:20px;">
+            <div class="panel-heading">Edit Contact</div>
+            <div class="panel-body">
+                <input type="hidden" class="edit-userid">
+                <form>
+                    <div class="form-group">
+                        <label for="Name">Name:</label>
+                        <input data-key='name' class="form-control edit-user-input" disabled id="Name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="Email">Email:</label>
+                        <input type="email" class="form-control edit-user-input" disabled data-key='email' id="Email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Phone:</label>
+                        <input class="form-control edit-user-input" data-key='phone' disabled id="Phone" required type="tel" pattern="^\d{4}\d{3}\d{4}$">
+                    </div>
+                    <button type="submit" class="btn btn-primary " id="showEdite">Edit</button>
+                    <button type="submit" class="btn btn-primary " id="delete">Delete</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://www.gstatic.com/firebasejs/4.8.1/firebase.js"></script>
+    <!--<script type="text/javascript" src="app.js"></script>-->
+    <script>
+
+  let config = {
+  apiKey: "AIzaSyCDkLcXXfgAvzJ8MGrqwKTVp3eQP77RUTg",
+  authDomain: "myproject-d4704.firebaseapp.com",
+  databaseURL: "https://myproject-d4704.firebaseio.com",
+  projectId: "myproject-d4704",
+  storageBucket: "myproject-d4704.appspot.com",
+  messagingSenderId: "519309165334",
+  appId: "1:519309165334:web:683c9c94d82f4787fe0637"
+};
+
+
+
+firebase.initializeApp(config);
+
+// Firebase Database Reference and the child
+        const dbRef = firebase.database().ref();
+
+        document.querySelector(".edit-userid").value =localStorage.getItem("userid");
+
+	const userRef = dbRef.child('users1/' + localStorage.getItem("userid"));
+
+	// set data to the user field
+	const editUserInputsUI = document.querySelectorAll(".edit-user-input");
+
+
+	userRef.on("value", snap => {
+
+		for(let i = 0, len = editUserInputsUI.length; i < len; i++) {
+
+			let key = editUserInputsUI[i].getAttribute("data-key");
+					editUserInputsUI[i].value = snap.val()[key];
+		}
+
+	});
+        ///////////////
+        document.getElementById("showEdite").setAttribute("userid", localStorage.getItem("userid"));
+        document.getElementById("showEdite").addEventListener("click", editButtonClicked);
+        //
+         document.getElementById("delete").setAttribute("userid", localStorage.getItem("userid"));
+        document.getElementById("delete").addEventListener("click", deleteButtonClicked1);
+
+
+
+        function deleteButtonClicked1(e) {
+
+    let choice = confirm('Do you really want to delete this record?');
+    if (choice === true) {
+
+        e.stopPropagation();
+
+        let userID = e.target.getAttribute("userid");
+
+        const userRef = dbRef.child('users1/' + userID);
+
+        userRef.remove();
+        return true;
+    }
+    return false;	
+window.open("index.html","_self");
+        }
+
+
+
+        function editButtonClicked(e) {
+    debugger;
+
+          e.preventDefault();
+        window.open("Edit.html","_self");
+            
+   
+    debugger;
+}
+        
+    </script>
+</body>
+
+</html>
+
+
+
